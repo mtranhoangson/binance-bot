@@ -1,0 +1,57 @@
+<mat-expansion-panel #exp>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Entry Target
+    </mat-panel-title>
+    <mat-panel-description>
+      Aquire The Asset Before Selling it Within One Trade
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <!-- <button mat-raised-button class="resume-btn" matTooltip="Add Target" (click)="addNewTarget()" *ngIf="!trade.entry">
+    Add Entry Target
+</button> -->
+<button mat-icon-button class="resume-btn" matTooltip="Add Target" (click)="addNewTarget()" *ngIf="!trade.entry">
+  <mat-icon>add_circle_outline</mat-icon>
+</button>
+<div class="trade-section" *ngIf="trade.entry">
+  
+  Operation: <span class="{{trade.entry.isSell()?'sell': 'buy'}}-button-on" style="padding: 2px;">{{trade.entry.isSell()?'Sell': 'Buy'}}</span>
+  <div *ngIf="!mode.isCreate()" style="display: inline;">&nbsp;Status: <span><strong>{{trade.entry.getTarget()?.status}}</strong></span></div>
+  <table class="full-width" cellspasing=0>
+    <tr *ngFor="let entryTarget of trade.entry.targets"><td>
+      <mat-form-field class="full-width" appearance="standard">
+        <mat-label>Entry Price</mat-label>
+        <input matInput type="text" id="targetPrice" name="targetPrice" [(ngModel)]="entryTarget.price" disabled="{{entryTarget.isCompleted()}}" >
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="full-width" appearance="standard">
+        <mat-label>Volume</mat-label>
+        <input matInput type="text" id="targetVol" name="targetVol" [(ngModel)]="entryTarget.vol" disabled="{{entryTarget.isCompleted()}}">
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="full-width exit-target-input" appearance="standard">
+        <mat-label>Status</mat-label>
+        <input matInput type="text" id="status" name="status" [(ngModel)]="entryTarget.status" disabled>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="full-width exit-target-input" appearance="standard">
+      <mat-label>Order ID</mat-label>
+      <input matInput type="text" id="id" name="id" [(ngModel)]="entryTarget.id" disabled>
+      <mat-hint *ngIf="entryTarget.id && entryTarget.best_price" matTooltip="Trigger Price">tp: {{entryTarget.best_price | number: '1.0-8'}}</mat-hint>
+    </mat-form-field></td>
+    <td>
+    <td>
+    </td>
+    <td>
+      <button mat-icon-button class="delete-btn" matTooltip="Remove Target" (click)="deleteTarget()" disabled="{{entryTarget.isCompleted()}}" >
+        <mat-icon>remove_circle_outline</mat-icon>
+      </button>
+    </td>
+  </tr>
+  </table>
+</div>
+</mat-expansion-panel>

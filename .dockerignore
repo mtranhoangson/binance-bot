@@ -1,0 +1,13 @@
+.idea
+api.json
+**/*.crt
+**/*.key
+/Conf
+/venv
+/Trades/Portfolio
+/Trades/Portfolio/*
+/Trades/Completed
+/Trades/Completed/*
+/Trades/Potential
+/Trades/Potential/*
+/admin/node_modules

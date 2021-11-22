@@ -1,0 +1,87 @@
+/* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.snackbar-primary {
+    background: #673ab7;
+    color: #fff;
+}
+
+.snackbar-warning {
+    background: #ffd740;
+    color: rgba(0,0,0,.87);
+}
+
+.snackbar-alarm {
+    background: #f44336;
+    color: #fff;
+}
+
+.buy-button-on {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.buy-button-off {
+    color: #28a745;
+    background-color: #fff;
+    border-color: #28a745;
+}
+
+.sell-button-on {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.sell-button-off {
+    color: #dc3545;
+    background-color: #fff;
+    border-color: #dc3545;
+}
+
+.resume-btn {
+    color: rgb(46, 95, 41)
+}
+
+.delete-btn {
+    color: #b41e2dcc;
+}
+
+.icon-display-sm {
+    transform: scale(0.8);
+}
+
+.full-width {
+    width: 100%
+}
+
+.trade-section {
+    margin: 6px 0 12px;
+}
+
+.mat-accordion .mat-expansion-panel:not(.mat-expanded),
+.mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing) {
+   margin-bottom: 4px;
+}
+
+.mat-accordion .mat-expansion-panel:is(.mat-expanded) {
+    margin: 6px 0;
+}
+
+mat-expansion-panel-header > .mat-content, .right-aligned-header > .mat-content {
+    justify-content: space-between;
+}
+
+.mat-content > mat-panel-title, .mat-content > mat-panel-description {
+  flex: 0 0 auto;
+}
+
+mat-panel-description {
+    text-align: right;
+}
+
+.accordeon {
+    margin: 1;
+}

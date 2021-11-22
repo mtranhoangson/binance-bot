@@ -1,0 +1,16 @@
+<div class="login-container">
+  <form (ngSubmit)="onSubmit($event)">
+    <mat-form-field class="full-width" appearance="standard">
+      <mat-label>Login</mat-label>
+      <input matInput placeholder="username" value="" name="login" [(ngModel)]="login">
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="standard">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" placeholder="password" name="password" [(ngModel)]="password">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary">Login</button>
+    <mat-error>{{error}}</mat-error>
+  </form>
+</div>

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  bot:
+    image: iilunin/crypto-bot:stable
+    ports:
+      - '127.0.0.1:3000:3000'
+    environment:
+      - TZ=Canada/Vancouver
+    env_file: .env
+    volumes:
+      - ./Trades/Portfolio:/usr/src/trades
+      - ./Trades/Completed:/usr/src/complete_trades
+      - ./Conf:/usr/src/configs:ro
+    restart: always

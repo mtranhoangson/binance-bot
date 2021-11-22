@@ -1,0 +1,15 @@
+.idea
+.vscode
+**/.env
+api.json
+/Conf/*
+/venv
+/logs
+/Trades/Portfolio
+/Trades/Portfolio/*
+/Trades/Completed
+/Trades/Completed/*
+/Trades/Potential
+/Trades/Potential/*
+sync_trades*.sh
+**/*.pyc

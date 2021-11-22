@@ -5,7 +5,7 @@ services:
     ports:
       - "3000"
     environment:
-      - TZ=Canada/Vancouver
+      - TZ=Asia/Tokyo
     env_file: .env
     volumes:
       - ./Trades/Portfolio:/usr/src/trades

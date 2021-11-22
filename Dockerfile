@@ -40,8 +40,8 @@ COPY ./admin /usr/src/app
 # generate build
 #RUN npm run lint && \ --depricated
 #RUN npm run build-prod
-RUN ng build
-RUN ng build --prod --output-path app_docker
+#RUN ng build --prod --output-path app_docker
+RUN ng build --prod --output-path release
 
 ##################
 ### production ###
@@ -72,9 +72,9 @@ VOLUME ["/usr/src/trades", "/usr/src/configs"]
 
 COPY . /usr/src/app
 #COPY --from=builder /usr/src/app/dist/admin /usr/src/app/API/templates
-COPY --from=bot-fe /usr/src/app/release /usr/src/app/API/templates
+COPY --from=builder /usr/src/app/release /usr/src/app/API/templates
 
-ENV TZ=America/New_York
+ENV TZ=Asia/Tokyo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 EXPOSE 3000

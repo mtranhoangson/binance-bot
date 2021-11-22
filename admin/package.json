@@ -11,7 +11,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "tmp11": "ng build --prod --output-path app_docker"
+    "tmp11": "ng build --prod --output-path release"
   },
   "private": true,
   "dependencies": {

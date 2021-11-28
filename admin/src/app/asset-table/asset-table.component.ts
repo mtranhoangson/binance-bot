@@ -1,18 +1,17 @@
-import {Component, OnDestroy, OnInit, TemplateRef, AfterViewInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 
 import {TradeInfo} from '../tradeInfo';
 import {BotApi} from '../botapi';
 import {BinanceService} from '../binance.service';
 import {Mode, TradeDetailMode} from '../trade-details';
 import {AuthService} from '../auth.service';
-import {Observable, Subscription, timer} from 'rxjs';
+import {Subscription, timer} from 'rxjs';
 import {TradeService} from '../trade.service';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 import { NotificationMessage, NotificationService, NotificatoinType } from '../services/notification.service';
 import { TradeDetailsComponent } from '../trade-details/trade-details.component';
-import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-asset-table',
@@ -21,7 +20,7 @@ import { switchMap, tap } from 'rxjs/operators';
 })
 export class AssetTableComponent implements OnInit, OnDestroy {
   private TradeDetailMode = TradeDetailMode;
-  
+
   trades: TradeInfo[] = [];
   tradesDS: MatTableDataSource<TradeInfo> = null;
   ws_resubscribe: boolean = true;
@@ -61,7 +60,7 @@ export class AssetTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.loginSubscrition.unsubscribe();
+    // this.loginSubscription.unsubscribe();
     this.tradeNotificationSubscription.unsubscribe();
     this.timerSubscibtion.unsubscribe();
   }
@@ -75,14 +74,14 @@ export class AssetTableComponent implements OnInit, OnDestroy {
         this.tradesDS.sort = this.sort;
         this.ws_resubscribe = false;
 
-        let newSymbols = this.trades.map(t => t.sym)
-        let oldSymbols = Object.keys(this.symTrade)
-        
+        const newSymbols = this.trades.map(t => t.sym);
+        const oldSymbols = Object.keys(this.symTrade);
+
         if (newSymbols.length != oldSymbols.length ||
           (newSymbols.sort().join() !== oldSymbols.sort().join())){
           this.ws_resubscribe = true;
         }
-        
+
         if (this.ws_resubscribe){
           this.symTrade = {};
         }
@@ -105,7 +104,7 @@ export class AssetTableComponent implements OnInit, OnDestroy {
         if (!this.ws_resubscribe){
           return;
         }
-        console.log(`Subscribing websockets`)
+        console.log(`Subscribing websockets`);
         if (this.symbolObserver) {
           this.symbolObserver.unsubscribe();
         }
@@ -197,7 +196,7 @@ export class AssetTableComponent implements OnInit, OnDestroy {
     this.selectedTrade = trade;
     this.isCloseTradeAction = closeTrade;
     const modalDialog = this.dialog.open(template);
-    
+
     modalDialog.afterClosed().subscribe(() => {
       this.selectedTrade = null;
       this.isCloseTradeAction = null;
@@ -219,7 +218,7 @@ export class AssetTableComponent implements OnInit, OnDestroy {
           this.handleCloseTradeRsp(res, isClose === true);
         }
       );
-    }    
+    }
   }
 
   handleCloseTradeRsp(result, close) {

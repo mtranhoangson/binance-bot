@@ -22,7 +22,7 @@ After you get API Key and Secret from Binance there are 2 options how to proceed
 and `-e "SECRET=BINANCE_API_SECRET"`
 
 ## Running bot on Mac / Linux
-1. Pull the image `docker pull iilunin/crypto-bot:stable`.
+1. Pull the image `docker pull tranhoangson/crypto-bot:stable`.
 2. Create the folder for active and completed trades:
     - `mkdir Active` - where you will put all new trades
     - `mkdir Completed` - where bot will put completed trades
@@ -39,7 +39,7 @@ docker run -d --rm --name cryptobot \
 -v $(pwd)/Active:/usr/src/trades \
 -v $(pwd)/Completed:/usr/src/complete_trades \
 -v $(pwd)/Config:/usr/src/configs:ro \
-iilunin/crypto-bot:stable
+tranhoangson/crypto-bot:stable
 ```
 
 Once the bot is started, you can place your trade files into the `Active` directory, so they picked up by the bot.
@@ -58,7 +58,7 @@ docker run -d --rm -p 3000:3000 --name cryptobot \
 -v $(pwd)/Active:/usr/src/trades \
 -v $(pwd)/Completed:/usr/src/complete_trades \
 -v $(pwd)/Config:/usr/src/configs:ro \
-iilunin/crypto-bot:stable
+tranhoangson/crypto-bot:stable
 ```
 
 You need to specify `API_USER` and `API_PASS`. With this credentials you'll be able to authenticate 

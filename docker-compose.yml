@@ -1,12 +1,12 @@
 version: '3'
 services:
   bot:
-    image: iilunin/crypto-bot:stable
+    image: tranhoangson/crypto-bot:stable
     ports:
       - '127.0.0.1:3000:3000'
     environment:
       - TZ=Asia/Tokyo
-    env_file: .env
+    env_file: evironment.env
     volumes:
       - ./Trades/Portfolio:/usr/src/trades
       - ./Trades/Completed:/usr/src/complete_trades

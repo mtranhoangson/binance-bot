@@ -24,7 +24,7 @@ export class NotificationService {
     public notification$: Subject<NotificationMessage> = new Subject();
 
     public Notify(msg: string, type: NotificatoinType = NotificatoinType.Regular): void{
-        this.notification$.next(new NotificationMessage(msg, null, type))
+        this.notification$.next(new NotificationMessage(msg, null, type));
     }
 
     public NotifyAlert(msg: string): void{

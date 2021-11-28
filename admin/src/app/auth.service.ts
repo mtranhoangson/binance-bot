@@ -13,10 +13,10 @@ const httpOptions = {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  API_URL = `${environment.BOT_API_URL}/api/v1`;
+  API_URL = `${environment.MY_API_URL}/api/v1`;
 
-  private loginAnouceSource = new Subject<boolean>();
-  loginEventAnounced$ =  this.loginAnouceSource.asObservable();
+  private loginAnnounceSource = new Subject<boolean>();
+  loginEventAnnounced$ =  this.loginAnnounceSource.asObservable();
 
   constructor(private http: HttpClient) {
     console.log(this.API_URL);
@@ -33,13 +33,13 @@ export class AuthService {
 
     localStorage.setItem('token', authResult.jwt);
     localStorage.setItem('exp', JSON.stringify(expiresAt.valueOf()) );
-    this.loginAnouceSource.next(true);
+    this.loginAnnounceSource.next(true);
   }
 
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('exp');
-    this.loginAnouceSource.next(false);
+    this.loginAnnounceSource.next(false);
   }
 
   public isLoggedIn() {

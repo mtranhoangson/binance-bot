@@ -1,15 +1,14 @@
+import deleteProperty = Reflect.deleteProperty;
+import { Balance } from './balance';
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import { LogEntry } from './log-entry';
+import {ApiResult} from './apiresult';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of, throwError} from 'rxjs';
+import {TradeDetails} from './trade-details';
 import {TradeInfo} from './tradeInfo';
 import {catchError, map, retry, tap} from 'rxjs/operators';
-import {ApiResult} from './apiresult';
-import {TradeDetails, Entry} from './trade-details';
-import deleteProperty = Reflect.deleteProperty;
 import {environment} from '../environments/environment';
-import { Balance } from './balance';
-import { LogEntry } from './log-entry';
-import * as moment from 'moment';
 
 
 const httpOptions = {
@@ -27,27 +26,28 @@ export class BinancePriceResult {
 @Injectable({ providedIn: 'root' })
 export class BotApi {
   RETRIES = 2;
-  API_URL = `${environment.BOT_API_URL}/api/v1`;
+  API_URL = `${environment.MY_API_URL}/api/v1`;
 
   constructor(private http: HttpClient) {
   }
 
-  getRecentLogFileContents(limit:number=1000, filename='latest'): Observable<LogEntry[]> {
+  getRecentLogFileContents(limit: number= 1000, filename= 'latest'): Observable<LogEntry[]> {
     return this.http.get<LogEntry[]>(`${this.API_URL}/logs?file=${filename}&limit=${limit}`).pipe(
       retry(this.RETRIES),
       map(r => {
 
         const entries: LogEntry[] = [];
 
-        r.forEach(entry => { 
-          entry.d = new Date(entry.d)
+        r.forEach(entry => {
+          entry.d = new Date(entry.d);
           entries.push(new LogEntry(entry));
         });
         // console.log(entries);
         return entries;
 
       }),
-      catchError(this.handleError('getActiveTrades',[])));
+      catchError(this.handleError('getActiveTrades', []))
+    );
   }
 
   addTrade(trade: TradeDetails ): Observable<ApiResult> {
@@ -67,9 +67,10 @@ export class BotApi {
     return this.http.get<any>(`${this.API_URL}/orderbook/${symbol}`, httpOptions).pipe(
       retry(this.RETRIES),
       map(data => {
-        if (!data)
+        if (!data) {
           return null;
-          
+        }
+
         const result = new BinancePriceResult();
         result.symbol = data.symbol;
         result.bestAsk = data.askPrice;
@@ -107,14 +108,15 @@ export class BotApi {
     );
   }
 
-  getBalances(force=false): Observable<Balance[]> {
-    return this.http.get<any>(`${this.API_URL}/balance/${force?'1':'0'}`, httpOptions).pipe(
+  getBalances(force= false): Observable<Balance[]> {
+    return this.http.get<any>(`${this.API_URL}/balance/${force ? '1' : '0'}`, httpOptions).pipe(
       retry(this.RETRIES),
       map(data => {
         const balanceList: Balance[] = [];
-        
-        for (let key in data) {
-          balanceList.push(new Balance({sym: key, avail: data[key].f, locked: data[key].l}))
+
+        // tslint:disable-next-line:forin
+        for (const key in data) {
+          balanceList.push(new Balance({sym: key, avail: data[key].f, locked: data[key].l}));
         }
 
         return balanceList;
@@ -136,7 +138,7 @@ export class BotApi {
     const pauseOrResume = pause ? 'pause' : 'resume';
 
     return this.http.post<ApiResult>(`${this.API_URL}/trade/${id}`, JSON.stringify({action: pauseOrResume}), httpOptions).pipe(
-      tap(_ => this.log(`All treades are ` + pause ? 'paused' : 'resumed')),
+      tap(_ => this.log(`All trades are ` + pause ? 'paused' : 'resumed')),
       catchError(this.handleError('pauseResumeTrade'))
     );
   }

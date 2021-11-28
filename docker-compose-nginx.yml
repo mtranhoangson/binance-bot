@@ -1,12 +1,12 @@
 version: '3'
 services:
   bot:
-    image: iilunin/crypto-bot:api-latest
+    image: tranhoangson/crypto-bot:api-latest
     ports:
       - "3000"
     environment:
       - TZ=Asia/Tokyo
-    env_file: .env
+    env_file: evironment.env
     volumes:
       - ./Trades/Portfolio:/usr/src/trades
       - ./Trades/Completed:/usr/src/complete_trades
@@ -14,7 +14,7 @@ services:
     restart: always
 
 #  web-nossl:
-#    image: iilunin/crypto-bot:fe-nosll-latest
+#    image: tranhoangson/crypto-bot:fe-nosll-latest
 #    ports:
 #      - 8080:80
 #    depends_on:
@@ -22,7 +22,7 @@ services:
 #    restart: always
 
   web-ssl:
-    image: iilunin/crypto-bot:fe-sll-latest
+    image: tranhoangson/crypto-bot:fe-sll-latest
     ports:
       - 3000:443
     volumes:

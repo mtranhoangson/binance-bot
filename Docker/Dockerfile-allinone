@@ -1,4 +1,4 @@
-FROM iilunin/crypto-bot:api-latest
+FROM tranhoangson/crypto-bot:api-latest
 #FROM api # building form local built Dockerfile-botapi
 
 # Copy form local built Dockerfile-fe

@@ -65,38 +65,46 @@ ng build
 
 # Build All project to docker
 file: Dockerfile
+## Choose build image for 'dockerfile'
 
+## Build success -> check image id
+```
+docker images
+```
 
 
 ---
 # Build Docker
 
+
 ## Show images
-docker ps -a
+docker images
 ```
-CONTAINER ID   IMAGE          COMMAND                 CREATED          STATUS                     PORTS     NAMES
-5bb6664a8cfc   5da0d1f798e4   "python3 main.py api"   27 minutes ago   Exited (1) 7 minutes ago             adoring_easley
+REPOSITORY   TAG        IMAGE ID       CREATED         SIZE
+<none>       <none>     cc823895eba8   4 minutes ago   1.04GB
 ```
 ## Add tag
 docker image tag <IMAGE> <docker-username>/<application-name>:<tag-name>
 ```
 Example:
-docker image tag 5da0d1f798e4 tranhoangson/bot99:latest
+sudo docker image tag cc823895eba8 tranhoangson/bot99:latest
 ```
 ## Push to server
 docker image push <docker-username>/<application-name>:<tag-name>
 ```
 Example:
-docker image push tranhoangson/bot99:latest
+sudo docker image push tranhoangson/bot99:latest
 ```
+
+## Run docker daemon
+sudo dockerd
+
 ## Pull from server to local
 docker image pull <docker-username>/<application-name>:<tag-name>
 ```
 Example:
-docker image pull tranhoangson/bot99:latest
+sudo docker image pull tranhoangson/bot99:latest
 ```
-## Run docker daemon
-sudo dockerd
 
 ## Run docker image
 ```

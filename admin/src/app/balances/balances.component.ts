@@ -12,34 +12,33 @@ import { BotApi } from '../botapi';
 export class BalancesComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
-  
+
   balances: MatTableDataSource<Balance> = null;
   displayedColumns: string[] = ['sym', 'available', 'locked', 'total'];
 
   constructor(private api: BotApi) { }
 
   ngOnInit(): void {
- 
   }
 
   ngAfterViewInit(): void {
     this.getBalances();
   }
 
-  getBalances():void {
+  getBalances(): void {
     this.api.getBalances(true).subscribe(
       res => {
         this.balances = new MatTableDataSource(res);
         this.balances.sort = this.sort;
         this.balances.sortingDataAccessor = (data, attribute) => data[attribute];
         this.balances.filterPredicate = this.balanceFilter;
-        this.balances.filter = "+";
+        this.balances.filter = '+';
         // this.exchangeInfo.forEach(si => this.symbols.push(<string>si.s.toUpperCase()));
       }
     );
   }
   //  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-  
+
   balanceFilter(balance: Balance, filter: string): boolean {
     return (balance.avail + balance.locked) > 0;
   }

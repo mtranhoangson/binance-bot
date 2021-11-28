@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {WebsocketService} from './websocket.service';
 import {Observable, of, Subject, throwError} from 'rxjs';
-import {catchError, map, retry, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {environment} from '../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {TradeInfo} from './tradeInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,7 @@ export class BinanceService {
     })
   };
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient) {
 
   }
 

@@ -1,22 +1,20 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-
-import {TradesRoutingModule} from './trades-routing.module';
-import { CommonModule } from '@angular/common';  
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AppComponent} from './app.component';
-import {LogInComponent} from './log-in/log-in.component';
-
-import {HTTP_INTERCEPTORS, HttpClientModule, HttpInterceptor} from '@angular/common/http';
-import {WebsocketService} from './websocket.service';
-import {AuthInterceptor} from './auth.interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AssetTableComponent } from './asset-table/asset-table.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 import { EntryDetailsComponent } from './trade-details/entry-details.component';
-import { TradeDetailsComponent } from './trade-details/trade-details.component';
 import { ExitDetailsComponent } from './trade-details/exit-details.component';
 import { SLDetailsComponent } from './trade-details/sl-details.component';
 import { SymbolValidatorDirective } from './trade-details/symbol-validator';
+import { TradeDetailsComponent } from './trade-details/trade-details.component';
+import {AppComponent} from './app.component';
+import {AuthInterceptor} from './auth.interceptor';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {LogInComponent} from './log-in/log-in.component';
+import {NgModule} from '@angular/core';
+import {TradesRoutingModule} from './trades-routing.module';
+import {WebsocketService} from './websocket.service';
 
 // material
 import {A11yModule} from '@angular/cdk/a11y';
@@ -66,7 +64,7 @@ import { MainTabsComponent } from './main-tabs/main-tabs.component';
 import { BalancesComponent } from './balances/balances.component';
 import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
 import { LogsComponent } from './logs/logs.component';
-// endmaterial
+// end material
 // const schemas: any[] = [];
 // schemas.push(CUSTOM_ELEMENTS_SCHEMA);
 
@@ -144,9 +142,11 @@ import { LogsComponent } from './logs/logs.component';
       useClass: AuthInterceptor,
       multi: true
     },
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}],
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
+  ],
   bootstrap: [AppComponent]
   // schemas: schemas
 })
+
 export class AppModule {
 }

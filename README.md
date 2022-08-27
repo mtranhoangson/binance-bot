@@ -119,5 +119,3 @@ sudo docker run -d --rm -p 3000:3000 --name cryptobot \
         -v $(pwd)/Config:/usr/src/configs:ro \
         tranhoangson/bot99:latest
 ```
-
-XXXX
